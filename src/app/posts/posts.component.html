@@ -1,0 +1,99 @@
+<button *ngIf="!showCreate" style="margin-top: 10px;" type="button" class="btn btn-outline-info float-right" (click)="showAllPosts = false; showPostDetail = false; showCreate = true; createForm();">Create post</button>
+<div class="row">
+  <div class="col-lg-8 col-md-10 ml-auto mr-auto">
+    <div class="table-responsive">
+      <table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5" *ngIf="showAllPosts && posts !== undefined && posts !== null">
+        <thead>
+        <tr>
+          <th>
+            <mfDefaultSorter by="title">Title</mfDefaultSorter>
+          </th>
+          <th class="text-right">
+            Actions
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let post of mf.data; let i = index;">
+          <td>{{post.title}}</td>
+          <td class="text-right">
+            <button type="button" rel="tooltip" (click)="showPostDetails(post.id)" class="btn btn-success btn-round btn-just-icon btn-sm" title="view">view</button>
+          </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+          <td colspan="4">
+            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+          </td>
+        </tr>
+        </tfoot>
+      </table>
+      <div class="col-md-10 offset-md-2">
+        <hr class="my-3">
+        <!-- form user info -->
+        <div class="card card-outline-secondary" *ngIf="showPostDetail && postDetails !== undefined && postDetails !== null">
+          <div class="card-header bg-primary">
+            <h3 class="mb-0" style="color: #ffffff">Post Information</h3>
+          </div>
+          <div class="card-body">
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label">Title</label>
+              <div class="col-lg-9">
+                {{postDetails.title}}
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label">Body</label>
+              <div class="col-lg-9">
+                {{postDetails.body}}
+              </div>
+            </div>
+          </div>
+          <br>
+        </div>
+        <br>
+        <div class="form-row text-center" *ngIf="showPostDetail || showCreate">
+          <div class="col-12">
+            <button type="button" class="btn btn-link" (click)="showAllPosts = true; showPostDetail = false; showCreate = false;" >Back to posts</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card" *ngIf="showCreate">
+  <div class="card-header bg-primary" style="color: #ffffff">
+    Create Post
+  </div>
+  <div class="card-body">
+    <form [formGroup]="postForm" novalidate (ngSubmit)="createPost(postForm.value)">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" formControlName="title" class="form-control" id="title" placeholder="Enter title">
+        <div class="alert" *ngIf="postForm.get('title').invalid">
+          <div [hidden]="!postForm.get('title').hasError('pattern')">Invalid title</div>
+          <div *ngIf="postForm.get('title').hasError('maxlength')">
+            title should not be more than 24 characters
+          </div>
+          <div *ngIf="postForm.get('title').hasError('required')">
+            title is required
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="body">Body</label>
+        <input type="text" formControlName="body" class="form-control" id="body" placeholder="Enter body">
+        <div class="alert" *ngIf="postForm.get('body').invalid">
+          <div *ngIf="postForm.get('body').hasError('maxlength')">
+            body should not be more than 50 characters
+          </div>
+          <div *ngIf="postForm.get('body').hasError('required')">
+            body is required
+          </div>
+        </div>
+      </div>
+      <button type="submit" [disabled]="this.postForm.invalid" class="btn btn-primary float-right">Submit</button>
+    </form>
+  </div>
+</div>

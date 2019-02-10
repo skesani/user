@@ -1,0 +1,86 @@
+<div class="row">
+  <div class="col-lg-8 col-md-10 ml-auto mr-auto">
+    <div class="table-responsive">
+      <table class="table" *ngIf="showAllUsers && users !== undefined && users !== null">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th class="text-right">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of users; let i = index;">
+          <td>{{user.name}}</td>
+          <td>{{user.username}}</td>
+          <td>{{user.email}}</td>
+          <td class="text-right">
+            <button type="button" rel="tooltip" (click)="showUserDetails(user.id)" class="btn btn-success btn-round btn-just-icon btn-sm" title="view">view</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="col-md-10 offset-md-2">
+        <hr class="my-3">
+        <!-- form user info -->
+        <div class="card card-outline-secondary" *ngIf="showUserDetail && userDetails !== undefined && userDetails !== null">
+          <div class="card-header bg-primary">
+            <h3 class="mb-0" style="color: #ffffff">User Information</h3>
+          </div>
+          <div class="card-body">
+              <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Name</label>
+                <div class="col-lg-9">
+                  {{userDetails.name}}
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Username</label>
+                <div class="col-lg-9">
+                  {{userDetails.username}}
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Email</label>
+                <div class="col-lg-9">
+                  {{userDetails.email}}
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Address</label>
+                <div class="col-lg-9">
+                  {{userDetails.address.street }}, {{userDetails.address.suite}} <br> {{userDetails.address.city}} ,  {{userDetails.address.zipcode}} <br> {{userDetails.address.geo.lat}}, {{userDetails.address.geo.lng}}
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Phone</label>
+                <div class="col-lg-9">
+                  {{userDetails.phone}}
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Website</label>
+                <div class="col-lg-9">
+                 {{userDetails.website}}
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">company</label>
+                <div class="col-lg-9">
+                  {{userDetails.company.name}} <br> {{userDetails.company.catchPhrase}} <br> {{userDetails.company.bs}}
+                </div>
+              </div>
+          </div>
+          <br>
+        </div>
+        <br>
+        <div class="form-row text-center" *ngIf="showUserDetail">
+          <div class="col-12">
+            <button type="button" class="btn btn-link" (click)="showAllUsers = true; showUserDetail = false" >Back to users</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
