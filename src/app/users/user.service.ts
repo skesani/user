@@ -13,7 +13,7 @@ export class UserService {
     constructor(private http: HttpClient) {
     }
 
-    private baseURI = 'https://jsonplaceholder.typicode.com/';
+    public baseURI = 'https://jsonplaceholder.typicode.com/';
 
     /**
      *
@@ -23,7 +23,7 @@ export class UserService {
        return this.http.get(this.baseURI + 'users');
     }
 
-    getUserDetails(id: boolean): any {
+    getUserDetails(id: number): any {
         return this.http.get(this.baseURI + 'users/' + id);
     }
 
