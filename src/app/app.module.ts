@@ -15,7 +15,6 @@ import {HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
 import {DataTableModule} from 'angular-6-datatable';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 @NgModule({
   declarations: [
@@ -33,8 +32,7 @@ import {HttpClientTestingModule} from '@angular/common/http/testing';
     RouterModule,
     DataTableModule,
     FormsModule,
-    ReactiveFormsModule,
-    HttpClientTestingModule
+    ReactiveFormsModule
   ],
   providers: [LoadingService, AlertService, UserService],
   bootstrap: [AppComponent]

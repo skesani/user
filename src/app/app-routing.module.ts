@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {UsersComponent} from './users/users.component';
 import {PostsComponent} from './posts/posts.component';
 
-const routes: Routes = [{path: '', component: UsersComponent}, {path: 'create', component: PostsComponent}, ];
+const routes: Routes = [{path: '', component: UsersComponent}, {path: 'create', component: PostsComponent}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

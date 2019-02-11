@@ -93,9 +93,11 @@ export class PostsComponent implements OnInit {
                 this.userService.savePost(obj).subscribe(post => {
                     this.alertService.success('Successfully created post with title: ' + post.title);
                     // after post sucess showing all posts and hiding post details and create
+                  setTimeout(() => {
                     this.showAllPosts = true;
                     this.showPostDetail = false;
                     this.showCreate = false;
+                  }, 900);
                 }, (error) => {
                     // if api throw error showing alert
                     this.alertService.error(api_error);
