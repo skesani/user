@@ -12,9 +12,18 @@ module.exports = function (config) {
       require('karma-coverage-istanbul-reporter'),
       require('@angular-devkit/build-angular/plugins/karma')
     ],
-    client: {
-        captureConsole: true,
-    },
+      browserConsoleLogOptions: {
+          level: 'log',
+          format: '%b %T: %m',
+          terminal: true,
+      },
+      client: {
+          captureConsole: true,
+          mocha: {
+              bail: true
+          }
+      },
+      logLevel: config.LOG_LOG,
     coverageIstanbulReporter: {
       dir: require('path').join(__dirname, '../coverage'),
       reports: ['html', 'lcovonly', 'text-summary'],
@@ -31,7 +40,6 @@ module.exports = function (config) {
     reporters: ['progress', 'kjhtml'],
     port: 9876,
     colors: true,
-    logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['Chrome'],
     singleRun: false
