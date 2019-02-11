@@ -40,7 +40,7 @@ export class UsersComponent implements OnInit {
     ngOnInit() {
     }
 
-    showUserDetails(id: boolean) {
+    showUserDetails(id: number) {
         this.showAllUsers = false;
         this.showUserDetail = true;
         this.userService.getUserDetails(id).subscribe(userDetails => {
