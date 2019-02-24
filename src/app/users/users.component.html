@@ -1,7 +1,9 @@
 <div class="row">
   <div class="col-lg-8 col-md-10 ml-auto mr-auto">
     <div class="table-responsive">
-      <table class="table" *ngIf="showAllUsers && users !== undefined && users !== null">
+      <button (click)="downloadCSV()" class="btn btn-primary float-right" style="margin: 10px;">Download CSV</button>
+      <button (click)="downloadPdf()" class="btn btn-primary float-right" style="margin: 10px;">Download PDF</button>
+      <table id="userTable" class="table" *ngIf="showAllUsers && users !== undefined && users !== null">
         <thead>
         <tr>
           <th>Name</th>
